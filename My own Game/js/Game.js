@@ -16,6 +16,8 @@ class Game {
         })
     }
 
+   
+
 
     start(){
         player = new Player();
@@ -28,8 +30,10 @@ class Game {
        
        bow1=createSprite(15,height/2 , 10,100);
        bow1.addImage('bow1', bowLeftImg)
+       bow1.scale = 0.8
        bow2=createSprite(width-30,height/2 , 10 , 100);
        bow2.addImage('bow2', bowRightImg)
+       bow2.scale = 0.8
         bows=[bow1,bow2];
 
     
@@ -49,13 +53,24 @@ class Game {
             for(var plr in allPlayers){       
                 index = index+1       
                 bows[index-1].y = height/2+allPlayers[plr].distance;
-                textSize(40)
-                fill("red")
-                text("Player1 :" + allPlayers.player1.score,width-100,100);
-                text("Player2 :" + allPlayers.player2.score,width-100,150);
+                
+                stroke("yellow")
+                strokeWeight(4)
+                fill("blue")
+                textFont("Algerian")
+                textSize(50)
+                text("Player1 :" + allPlayers.player1.score,width/2-200,100);
+                text("Player2 :" + allPlayers.player2.score,width/2-200,150);
+                
+                /*if (allPlayers.player1.score === 10 || allPlayers.player2.score === 10) {
+                  gameState = 2
+                  this.writeState(2)
+                }*/
             }
             
         }
+
+
 
         
         if(keyDown(UP_ARROW)  &&  player.index!=null){
@@ -73,13 +88,16 @@ class Game {
 
         if(keyWentDown("space")){
             arrow = createSprite(45,65,60,10);
+            arrow.scale = 0.1
             arrow.x = bows[player.index-1].x
             arrow.y = bows[player.index-1].y
             if(player.index===1){
                 arrow.velocityX = 8
+                arrow.addImage('arrowright', arrRightImg)
             }
             if(player.index===2){
                 arrow.velocityX = -8
+                arrow.addImage('arrowleft', arrLeftImg)
             }
             arrow.lifetime = width/8;
             arrowGroup.add(arrow);
@@ -87,9 +105,27 @@ class Game {
 
         this.spawnBalloon();
         this.burstBallooon();
+
+        if (player.score === 5 ) {
+            gameState = 2
+            this.writeState(2)
+            player.rank+=1
+            player.updateHighestRank(player.rank)
+
+        }
                      
         drawSprites();
     }
+
+    end(){
+       if (player.rank === 1) {
+           text("Winner Winner Chicken Dinner")
+       } else {
+           text("Loser Loser Veggie Dinner ")
+       }
+    }
+
+
 
     spawnBalloon(){
         if(World.frameCount % 40 === 0){
@@ -115,7 +151,7 @@ class Game {
     burstBallooon(){
         for (var i = 0; i<arrowGroup.length;i++ ) {
             for (var j = 0; j<balloonGroup.length; j++) {
-                if( arrowGroup.get(i).isTouching(balloonGroup.get(j))){
+                if( balloonGroup.get(j).isTouching(arrowGroup.get(i))){
                     arrowGroup.get(i).destroy();
                     balloonGroup.get(j).destroy();
                     player.score = player.score+1;

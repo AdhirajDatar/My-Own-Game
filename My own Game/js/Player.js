@@ -4,6 +4,7 @@ class Player{
         this.name = null
         this.index = null
         this.distance = 0
+        this.rank = 0
     }
 
     getCount(){
@@ -18,6 +19,19 @@ class Player{
            playerCount: data
        })
    }
+
+   getHighestRank(){
+    var highRankRef = database.ref('highestRank')
+    highRankRef.on("value",function(data){
+       this.rank = data.val();
+    })
+   }
+
+    updateHighestRank(rank){
+    database.ref('/').update({
+        highestRank: rank
+    })
+    }
 
 
    static getPlayerInfo(){

@@ -26,8 +26,8 @@ function preload(){
   arrRightImg=loadImage("images/ArrowRight.png")
   bkgMiddle=loadImage("images/BkgMiddleImage.jpg")
   bkgStart=loadImage("images/BkgStartImage.jpg")
-  bowLeftImg=loadImage("images/BowFacingLeft.png")
-  bowRightImg=loadImage("images/BowFacingRight.png")
+  bowLeftImg=loadImage("images/BowLeft.png")
+  bowRightImg=loadImage("images/BowRight.png")
 }
 
 function setup() {
@@ -47,10 +47,14 @@ function draw() {
   if (playerCount===2){
     game.writeState(1)
   }
-console.log(gameState)
+
   if (gameState===1){
     clear()
     game.play();
+  }
+
+  if(gameState === 2 ){
+    game.end();
   }
   
   
