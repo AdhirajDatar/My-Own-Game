@@ -17,6 +17,8 @@ var game , player , form;
 
 var allPlayers ;
 
+var arrLeave,congrats,blop
+
 function preload(){
   blueBalloon=loadImage("images/BlueBalloon.png");
   blackBalloon=loadImage("images/BlackBalloon.png")
@@ -34,6 +36,10 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
 
   database= firebase.database();
+
+  arrLeave = loadSound("Sounds/Swoosh.mp3")
+  congrats = loadSound("Sounds/Congrats.wav")
+  blop = loadSound("Sounds/Blop.mp3")
 
   game = new Game();
   game.getState()
