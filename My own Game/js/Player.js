@@ -27,7 +27,7 @@ class Player{
     })
    }
 
-    updateHighestRank(rank){
+    static updateHighestRank(rank){
     database.ref('/').update({
         highestRank: rank
     })

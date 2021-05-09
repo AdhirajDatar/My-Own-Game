@@ -37,6 +37,7 @@ class Form {
       this.reset.mousePressed(()=>{
         player.updateCount(0);
         game.writeState(0);
+        Player.updateHighestRank(0);
       });
   
     }

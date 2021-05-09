@@ -91,7 +91,7 @@ class Game {
             arrow.scale = 0.1
             arrow.x = bows[player.index-1].x
             arrow.y = bows[player.index-1].y
-            arrLeave.play
+            arrLeave.play()
             if(player.index===1){
                 arrow.velocityX = 8
                 arrow.addImage('arrowright', arrRightImg)
@@ -111,7 +111,7 @@ class Game {
             gameState = 2
             this.writeState(2)
             player.rank+=1
-            player.updateHighestRank(player.rank)
+            Player.updateHighestRank(player.rank)
 
         }
                      
@@ -121,7 +121,7 @@ class Game {
     end(){
        if (player.rank === 1) {
            text("Winner Winner Chicken Dinner")
-           congrats.play
+           congrats.play(); 
        } else {
            text("Loser Loser Veggie Dinner ")
        }
@@ -157,7 +157,7 @@ class Game {
                     arrowGroup.get(i).destroy();
                     balloonGroup.get(j).destroy();
                     player.score = player.score+1;
-                    blop.play;
+                    blop.play()
                     player.update()
                 }
                 
