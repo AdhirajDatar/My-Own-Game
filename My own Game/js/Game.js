@@ -62,10 +62,7 @@ class Game {
                 text("Player1 :" + allPlayers.player1.score,width/2-200,100);
                 text("Player2 :" + allPlayers.player2.score,width/2-200,150);
                 
-                /*if (allPlayers.player1.score === 10 || allPlayers.player2.score === 10) {
-                  gameState = 2
-                  this.writeState(2)
-                }*/
+               
             }
             
         }
@@ -119,11 +116,18 @@ class Game {
     }
 
     end(){
+        textSize(50)
+        textFont("Bell MT")
+        fill("black")
+        
+
+
        if (player.rank === 1) {
-           text("Winner Winner Chicken Dinner")
-           congrats.play(); 
+           text("Winner Winner Chicken Dinner", windowWidth/3,windowHeight/2)
+          // congrats.play(); 
+           //congrats.stop();
        } else {
-           text("Loser Loser Veggie Dinner ")
+           text("Loser Loser Veggie Dinner ", windowWidth/3,windowHeight/2)
        }
     }
 

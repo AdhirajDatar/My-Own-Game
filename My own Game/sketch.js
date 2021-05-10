@@ -52,6 +52,7 @@ function draw() {
 
   if (playerCount===2){
     game.writeState(1)
+    playerCount = 089;
   }
 
   if (gameState===1){
